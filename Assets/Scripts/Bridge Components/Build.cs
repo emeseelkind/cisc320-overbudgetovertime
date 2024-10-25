@@ -69,6 +69,7 @@ public class Build : MonoBehaviour
 
     void drawMaterial(Vector3 mousePos)
     {
-        lr.SetPosition(1, mousePos);
+        Vector3 roundedVector = new Vector3(Mathf.Round(mousePos.x), Mathf.Round(mousePos.y), mousePos.z);
+        lr.SetPosition(1, roundedVector);
     }
 }
