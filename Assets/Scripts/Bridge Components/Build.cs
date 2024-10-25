@@ -17,6 +17,8 @@ public class Build : MonoBehaviour
     public GameObject anchorPiece;
     public GameObject bridgePiece;
 
+    public LayerMask anchorLayer;
+
 
 
     // Start is called before the first frame update
@@ -50,7 +52,7 @@ public class Build : MonoBehaviour
     void startDrawing()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, anchorLayer);
 
         if (hit.collider == null)
         {
@@ -107,5 +109,6 @@ public class Build : MonoBehaviour
 
         anchor.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
         //Need to figure out multiple pieces on a joint, and connecting two ends 
+        //bug: can't draw to the left
     }
 }

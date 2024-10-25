@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 209496004}
   - component: {fileID: 209496006}
   - component: {fileID: 209496007}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ' Anchor Start'
   m_TagString: Anchor
   m_Icon: {fileID: 0}
@@ -303,6 +303,9 @@ MonoBehaviour:
   originAnchor: {fileID: 0}
   anchorPiece: {fileID: 5669532401839460780, guid: d6a3763d67553e74fb560c25b963392c, type: 3}
   bridgePiece: {fileID: 2286113087570501537, guid: d5a2413a14d134047aa32de9b36af12b, type: 3}
+  anchorLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &357205481
 Transform:
   m_ObjectHideFlags: 0
@@ -1131,7 +1134,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1360,7 +1363,7 @@ GameObject:
   - component: {fileID: 1474674547}
   - component: {fileID: 1474674546}
   - component: {fileID: 1474674550}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Anchor End
   m_TagString: Anchor
   m_Icon: {fileID: 0}
