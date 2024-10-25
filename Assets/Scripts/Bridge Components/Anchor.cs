@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Anchor : MonoBehaviour
 {
-    List<GameObject> connectedPieces = new List<GameObject>();
+    public List<GameObject> connectedPieces = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +15,10 @@ public class Anchor : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void addPiece(GameObject newPiece)
+    {
+        connectedPieces.Add(newPiece);
     }
 }
