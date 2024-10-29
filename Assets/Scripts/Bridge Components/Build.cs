@@ -89,8 +89,11 @@ public class Build : MonoBehaviour
     void build()
     {
         Vector3 pieceVector = drawEndPoint - originAnchor.transform.position;
+        Debug.Log("pieceVector:" + pieceVector);
         float pieceLength = pieceVector.magnitude;
+        Debug.Log("piece length: " + pieceLength);
         Vector3 pieceLoaction = pieceVector / 2 + originAnchor.transform.position;
+        Debug.Log("piece location: " + pieceLoaction);
 
         GameObject anchor = Instantiate(anchorPiece, drawEndPoint, Quaternion.identity);
         GameObject piece = Instantiate(bridgePiece, pieceLoaction, Quaternion.FromToRotation(Vector3.right, pieceVector.normalized));
@@ -106,8 +109,8 @@ public class Build : MonoBehaviour
 
         
         piece.GetComponent<HingeJoint2D>().connectedBody = originAnchor.GetComponent<Rigidbody2D>();
-
         anchor.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
+
         //Need to figure out multiple pieces on a joint, and connecting two ends 
         //bug: can't draw to the left
     }
