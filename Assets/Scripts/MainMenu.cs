@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("MainMenu::PlayGame");
-        // SceneManager.LoadScene();
+        SceneManager.LoadScene("Scenes/LevelSelectScene");
     }
 
     public void SwitchSettingPanel()

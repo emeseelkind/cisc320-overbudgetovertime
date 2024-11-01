@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 public class SettingMenu : MonoBehaviour
 {
@@ -134,6 +135,11 @@ public class SettingMenu : MonoBehaviour
     public void SwitchSettingPanel()
     {
         gameObject.SetActive(!gameObject.activeSelf);
+    }
+
+    public void HomeButtonEvent()
+    {
+        SceneManager.LoadScene("Scenes/MainScene");
     }
 
     void OnDestroy()
