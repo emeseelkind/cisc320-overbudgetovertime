@@ -7,6 +7,7 @@ public class Build : MonoBehaviour
 {
     private bool drawing = false;
 
+    Vector3 mouseWorldPos;
     private Transform drawStartPoint;
     private Vector3 drawEndPoint;
 
@@ -16,6 +17,7 @@ public class Build : MonoBehaviour
 
     public GameObject anchorPiece;
     public GameObject bridgePiece;
+    public GameObject connectingEnd;
 
     public LayerMask anchorLayer;
 
@@ -25,14 +27,12 @@ public class Build : MonoBehaviour
     void Start()
     {
         lr = gameObject.GetComponent<LineRenderer>();
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0f;
-
         if (Input.GetMouseButtonDown(0))
         {
             startDrawing();
@@ -45,6 +45,8 @@ public class Build : MonoBehaviour
 
         if(drawing == true)
         {
+            mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f;
             drawMaterial(mouseWorldPos);
         }
     }
@@ -65,7 +67,6 @@ public class Build : MonoBehaviour
 
             lr.positionCount = 2;
             lr.SetPosition(0, drawStartPoint.position);
-            Debug.Log("CLICKED " + hit.collider.name);
             originAnchor = hit.collider.gameObject;
         }
     }
@@ -77,7 +78,16 @@ public class Build : MonoBehaviour
         drawing = false;
         lr.positionCount = 0;
 
-        build();
+        RaycastHit2D hit = Physics2D.Raycast(drawEndPoint, Vector2.zero, Mathf.Infinity, anchorLayer);
+
+        if (hit.collider == null)
+        {
+            build(null);
+        }
+        else if (hit.collider.gameObject.tag == "Anchor")
+        {
+            build(hit.collider.gameObject);
+        }    
     }
 
     void drawMaterial(Vector3 mousePos)
@@ -86,31 +96,45 @@ public class Build : MonoBehaviour
         lr.SetPosition(1, roundedVector);
     }
 
-    void build()
+    void build(GameObject endAnchor)
     {
+        
         Vector3 pieceVector = drawEndPoint - originAnchor.transform.position;
-        Debug.Log("pieceVector:" + pieceVector);
         float pieceLength = pieceVector.magnitude;
-        Debug.Log("piece length: " + pieceLength);
         Vector3 pieceLoaction = pieceVector / 2 + originAnchor.transform.position;
-        Debug.Log("piece location: " + pieceLoaction);
 
-        GameObject anchor = Instantiate(anchorPiece, drawEndPoint, Quaternion.identity);
-        GameObject piece = Instantiate(bridgePiece, pieceLoaction, Quaternion.FromToRotation(Vector3.right, pieceVector.normalized));
+        
+        float angle = Vector2.SignedAngle(Vector2.right, new Vector2(pieceVector.x, pieceVector.y));
+        GameObject piece = Instantiate(bridgePiece, pieceLoaction, Quaternion.Euler(0, 0, angle));
 
         Vector3 adjustedPieceScale = piece.transform.localScale;
         adjustedPieceScale.x *= pieceLength;
         piece.transform.localScale = adjustedPieceScale;
 
         originAnchor.GetComponent<Anchor>().addPiece(piece);
-        anchor.GetComponent<Anchor>().addPiece(piece);
-        piece.GetComponent<Piece>().anchor1 = anchor;
         piece.GetComponent<Piece>().anchor2 = originAnchor;
-
-        
         piece.GetComponent<HingeJoint2D>().connectedBody = originAnchor.GetComponent<Rigidbody2D>();
-        anchor.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
+        
 
+        if (endAnchor == null) 
+        {
+            GameObject anchor = Instantiate(anchorPiece, drawEndPoint, Quaternion.identity);
+
+            anchor.GetComponent<Anchor>().addPiece(piece);
+            piece.GetComponent<Piece>().anchor1 = anchor;
+            
+            anchor.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            GameObject endConnector = Instantiate(connectingEnd, Vector3.zero, Quaternion.identity, endAnchor.transform);
+
+            endAnchor.GetComponent<Anchor>().addPiece(piece);
+            piece.GetComponent<Piece>().anchor1 = endAnchor;
+
+            endConnector.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
+
+        }
         //Need to figure out multiple pieces on a joint, and connecting two ends 
         //bug: can't draw to the left
     }
