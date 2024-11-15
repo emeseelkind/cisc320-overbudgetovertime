@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -17,9 +18,11 @@ public class Build : MonoBehaviour
 
     public GameObject anchorPiece;
     public GameObject bridgePiece;
-    public GameObject connectingEnd;
 
     public LayerMask anchorLayer;
+    public LayerMask bridgeLayer;
+
+    public bool deleting = false;
 
 
 
@@ -33,21 +36,31 @@ public class Build : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!deleting)
         {
-            startDrawing();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                startDrawing();
+            }
 
-        if (Input.GetMouseButtonUp(0) && drawing == true)
-        {
-            stopDrawing(mouseWorldPos);
-        }
+            if (Input.GetMouseButtonUp(0) && drawing == true)
+            {
+                stopDrawing(mouseWorldPos);
+            }
 
-        if(drawing == true)
+            if (drawing == true)
+            {
+                mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mouseWorldPos.z = 0f;
+                drawMaterial(mouseWorldPos);
+            }
+        }
+        else
         {
-            mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0f;
-            drawMaterial(mouseWorldPos);
+            if (Input.GetMouseButtonDown(0))
+            {
+                delete();
+            }
         }
     }
 
@@ -80,14 +93,17 @@ public class Build : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(drawEndPoint, Vector2.zero, Mathf.Infinity, anchorLayer);
 
-        if (hit.collider == null)
+        if (drawEndPoint != originAnchor.transform.position)
         {
-            build(null);
+            if (hit.collider == null)
+            {
+                build(null);
+            }
+            else if (hit.collider.gameObject.tag == "Anchor")
+            {
+                build(hit.collider.gameObject);
+            }
         }
-        else if (hit.collider.gameObject.tag == "Anchor")
-        {
-            build(hit.collider.gameObject);
-        }    
     }
 
     void drawMaterial(Vector3 mousePos)
@@ -113,8 +129,16 @@ public class Build : MonoBehaviour
 
         originAnchor.GetComponent<Anchor>().addPiece(piece);
         piece.GetComponent<Piece>().anchor2 = originAnchor;
-        piece.GetComponent<HingeJoint2D>().connectedBody = originAnchor.GetComponent<Rigidbody2D>();
-        
+
+        HingeJoint2D[] hingeJoints = piece.GetComponents<HingeJoint2D>();
+        foreach (HingeJoint2D hinge in hingeJoints)
+        {
+            if (hinge.anchor == new Vector2(-0.5f, 0))
+            {
+                hinge.connectedBody = originAnchor.GetComponent<Rigidbody2D>();
+                break;
+            }
+        }
 
         if (endAnchor == null) 
         {
@@ -122,20 +146,53 @@ public class Build : MonoBehaviour
 
             anchor.GetComponent<Anchor>().addPiece(piece);
             piece.GetComponent<Piece>().anchor1 = anchor;
-            
-            anchor.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
+
+            foreach (HingeJoint2D hinge in hingeJoints)
+            {
+                if (hinge.anchor == new Vector2(0.5f, 0))
+                {
+                    hinge.connectedBody = anchor.GetComponent<Rigidbody2D>();
+                    break;
+                }
+            }
         }
         else
         {
-            GameObject endConnector = Instantiate(connectingEnd, Vector3.zero, Quaternion.identity, endAnchor.transform);
-
             endAnchor.GetComponent<Anchor>().addPiece(piece);
             piece.GetComponent<Piece>().anchor1 = endAnchor;
 
-            endConnector.GetComponent<HingeJoint2D>().connectedBody = piece.GetComponent<Rigidbody2D>();
-
+            foreach (HingeJoint2D hinge in hingeJoints)
+            {
+                if (hinge.anchor == new Vector2(0.5f, 0))
+                {
+                    hinge.connectedBody = endAnchor.GetComponent<Rigidbody2D>();
+                    break;
+                }
+            }
         }
-        //Need to figure out multiple pieces on a joint, and connecting two ends 
-        //bug: can't draw to the left
+    }
+
+    void delete()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, bridgeLayer);
+
+        if (hit.collider == null)
+        {
+            return;
+        }
+        else if (hit.collider.gameObject.tag == "Bridge Material")
+        {
+            Debug.Log("Deleting piece");
+            GameObject piece = hit.collider.gameObject;
+
+            GameObject anchor1 = piece.GetComponent<Piece>().anchor1;
+            GameObject anchor2 = piece.GetComponent<Piece>().anchor2;
+
+            anchor1.GetComponent<Anchor>().deletePiece(piece);
+            anchor2.GetComponent<Anchor>().deletePiece(piece);
+
+            Destroy(piece);
+        }
     }
 }

@@ -126,7 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bfaeb258649df439ae26aaefe1dfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHard: 1
+  startingStrength: 0
   connectedPieces: []
+  strength: 0
+  strengthPurity: 0
 --- !u!58 &8470635894748558200
 CircleCollider2D:
   m_ObjectHideFlags: 0
