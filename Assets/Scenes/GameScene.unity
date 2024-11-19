@@ -298,13 +298,13 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &478363461 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3689314648834007999, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4034618808095025945, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
   m_PrefabInstance: {fileID: 478363458}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260356690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d97a5ea0d6dcd4a92e5c34d0c3be81, type: 3}
+  m_Script: {fileID: 11500000, guid: aa408f356e81f044d8204f735fd930b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &587786026
@@ -601,9 +601,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1319536050}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1319536050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d10806e8110b6642a014fa1b4200bc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e3c82fd2f20a594bb9ea76812d9b5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 1260356690}
@@ -1436,9 +1436,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1319536050}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

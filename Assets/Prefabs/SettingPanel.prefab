@@ -1796,7 +1796,7 @@ GameObject:
   - component: {fileID: 3907815820411531175}
   - component: {fileID: 2104356525839521833}
   - component: {fileID: 1110551369029485579}
-  - component: {fileID: 3689314648834007999}
+  - component: {fileID: 4034618808095025945}
   m_Layer: 0
   m_Name: SettingPanel
   m_TagString: Untagged
@@ -1862,7 +1862,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3689314648834007999
+--- !u!114 &4034618808095025945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4554190732962460703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d97a5ea0d6dcd4a92e5c34d0c3be81, type: 3}
+  m_Script: {fileID: 11500000, guid: aa408f356e81f044d8204f735fd930b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   toggleFullScreen: {fileID: 51480960746776976}
@@ -2606,7 +2606,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3689314648834007999}
+      - m_Target: {fileID: 4034618808095025945}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: SwitchSettingPanel
         m_Mode: 1

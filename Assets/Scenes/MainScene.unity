@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 235256947}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: SettingButtonEvent
+        m_MethodName: SwitchSettingPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 235256940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8988fbecccdc44d83f1af5ca5324c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fcec9f53c8653148a5d3a8ec4110cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settingPanel: {fileID: 1038557195}
