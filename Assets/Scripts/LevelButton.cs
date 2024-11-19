@@ -18,5 +18,8 @@ public class LevelButton : MonoBehaviour
         {
             button.onClick.AddListener(onClickAction);
         }
+
+        // Notify UnlockManager to add this button to the list
+        UnlockManager.Instance.AddLevelButton(button);
     }
 }
