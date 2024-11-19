@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class SettingsMenu : MonoBehaviour
+public class testSettings : MonoBehaviour
 {
     public Toggle toggleFullScreen;
     public TMP_Dropdown dropdownResolution;
