@@ -5,23 +5,13 @@ using UnityEngine;
 public class Anchor : MonoBehaviour
 {
     public bool isHard = false;
-    public float startingStrength = 0;
 
     public List<GameObject> connectedPieces = new List<GameObject>();
 
-    public float strength;
-    public float strengthPurity;
     // Start is called before the first frame update
     void Start()
     {
-        if(isHard)
-        {
-            strength = 100;
-        }
-        else
-        {
-            calculateConnectingStrength();
-        }
+        
     }
 
     // Update is called once per frame
@@ -44,19 +34,28 @@ public class Anchor : MonoBehaviour
         }
     }
 
-    void calculateConnectingStrength()
+    public float disperseLoad(GameObject originPiece, float valueDisperse)
     {
-        if (!isHard)
+        float undispersedLoad = valueDisperse;
+        float dispersionPerPiece = valueDisperse * 0.1f;
+        if(connectedPieces.Count > 7)
         {
-            float temp = 0;
-            foreach (GameObject piece in connectedPieces)
-            {
-                temp += piece.GetComponent<Piece>().strength;
-            }
-            strength = temp;
+            dispersionPerPiece = (valueDisperse * 0.6f) / (connectedPieces.Count-1);
         }
-    }
 
+        foreach(GameObject piece in connectedPieces)
+        {
+            if(piece.GetComponent<Piece>().takingLoad() == true)
+            {
+                piece.GetComponent<Piece>().setDisperseLoad(dispersionPerPiece);
+                undispersedLoad -= dispersionPerPiece;
+            }
+        }
+
+        return undispersedLoad;
+    }
+    
+    /*
     void OnEnable()
     {
         EventHandler.totalStrengthChanged += calculateConnectingStrength;
@@ -66,4 +65,5 @@ public class Anchor : MonoBehaviour
     {
         EventHandler.totalStrengthChanged -= calculateConnectingStrength;
     }
+    */
 }
