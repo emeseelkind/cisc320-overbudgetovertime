@@ -23,7 +23,7 @@ public class BridgeDurability : MonoBehaviour
         Debug.Log(forceApplied);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         double mass = collision.gameObject.GetComponent<Rigidbody2D>().mass;
         double velocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity.y;

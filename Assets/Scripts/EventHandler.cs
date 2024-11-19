@@ -16,10 +16,7 @@ public class EventHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            TriggerEvent();
-        }
+
     }
 
     public static void TriggerEvent()
