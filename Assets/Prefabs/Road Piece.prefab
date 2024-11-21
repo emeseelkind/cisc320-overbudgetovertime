@@ -260,6 +260,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor1: {fileID: 0}
   anchor2: {fileID: 0}
+  loadTaken: 0
+  tempLoad: 0
+  playPhase: 1
+  takingLoad: 0
 --- !u!233 &7585020030176883734
 HingeJoint2D:
   m_ObjectHideFlags: 0

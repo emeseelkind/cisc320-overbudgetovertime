@@ -37,21 +37,27 @@ public class Anchor : MonoBehaviour
     public float disperseLoad(GameObject originPiece, float valueDisperse)
     {
         float undispersedLoad = valueDisperse;
-        float dispersionPerPiece = valueDisperse * 0.1f;
-        if(connectedPieces.Count > 7)
+        float dispersionPerPiece = valueDisperse * 0.2f;
+        if(connectedPieces.Count > 4)
         {
             dispersionPerPiece = (valueDisperse * 0.6f) / (connectedPieces.Count-1);
         }
 
         foreach(GameObject piece in connectedPieces)
         {
-            if(piece.GetComponent<Piece>().takingLoad() == true)
+            if(piece == originPiece)
             {
+                continue;
+            }
+
+            if(piece.GetComponent<Piece>().takingLoad == false)
+            {
+                piece.GetComponent<Piece>().takingLoad = true;
                 piece.GetComponent<Piece>().setDisperseLoad(dispersionPerPiece);
                 undispersedLoad -= dispersionPerPiece;
+                piece.GetComponent<Piece>().takingLoad = false;               
             }
         }
-
         return undispersedLoad;
     }
     
