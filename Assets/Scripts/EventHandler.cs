@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class EventHandler : MonoBehaviour
 {
-    public delegate void calculateBridgeStrength();
-    public static event calculateBridgeStrength totalStrengthChanged;
+    public delegate void startGame();
+    public static event startGame addGravity;
+
+    public delegate void deleteMode();
+    public static event deleteMode toggleDelete;
+
+    public delegate void changeMaterial(int type);
+    public static event changeMaterial onMaterialChange;
+
+    public delegate void pReset();
+    public static event pReset resetMap;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +28,23 @@ public class EventHandler : MonoBehaviour
 
     }
 
-    public static void TriggerEvent()
+    public static void TriggerGravity()
     {
-        totalStrengthChanged?.Invoke();
+        addGravity?.Invoke();
+    }
+
+    public static void TriggerDelete()
+    {
+        toggleDelete?.Invoke();
+    }
+
+    public static void TriggerMaterialChange(int type)
+    {
+        onMaterialChange?.Invoke(type);
+    }
+
+    public static void TriggerMapReset()
+    {
+        resetMap?.Invoke();
     }
 }

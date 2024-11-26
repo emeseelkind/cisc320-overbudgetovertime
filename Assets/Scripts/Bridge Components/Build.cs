@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Net.Sockets;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Build : MonoBehaviour
@@ -13,8 +14,14 @@ public class Build : MonoBehaviour
     private Vector3 drawEndPoint;
 
     private LineRenderer lr;
+    public float maxDrawLength;
 
     public GameObject originAnchor;
+
+    public GameObject roadPiece;
+    public GameObject woodPiece;
+    public GameObject brickPiece;
+    public GameObject metalPiece;
 
     public GameObject anchorPiece;
     public GameObject bridgePiece;
@@ -24,7 +31,7 @@ public class Build : MonoBehaviour
 
     public bool deleting = false;
 
-
+    public float budget;
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +93,21 @@ public class Build : MonoBehaviour
 
     void stopDrawing(Vector3 mousePos)
     {
-        drawEndPoint = new Vector3(Mathf.Round(mousePos.x), Mathf.Round(mousePos.y), 0);
+        Vector3 direction = mousePos - drawStartPoint.position;
+        float length = direction.magnitude;
+
+        if (length > maxDrawLength)
+        {
+            direction = direction.normalized * maxDrawLength;
+        }
+
+        Vector3 endPoint = drawStartPoint.position + direction;
+
+        drawEndPoint = new Vector3(
+            Mathf.Round(endPoint.x),
+            Mathf.Round(endPoint.y),
+            0
+        );
 
         drawing = false;
         lr.positionCount = 0;
@@ -108,8 +129,23 @@ public class Build : MonoBehaviour
 
     void drawMaterial(Vector3 mousePos)
     {
-        Vector3 roundedVector = new Vector3(Mathf.Round(mousePos.x), Mathf.Round(mousePos.y), 0);
-        lr.SetPosition(1, roundedVector);
+        Vector3 direction = mousePos - drawStartPoint.position;
+        float length = direction.magnitude;
+
+        if (length > maxDrawLength)
+        {
+            direction = direction.normalized * maxDrawLength;
+        }
+
+        Vector3 endPoint = drawStartPoint.position + direction;
+
+        Vector3 roundedEndPoint = new Vector3(
+            Mathf.Round(endPoint.x),
+            Mathf.Round(endPoint.y),
+            0 
+        );
+
+        lr.SetPosition(1, roundedEndPoint);
     }
 
     void build(GameObject endAnchor)
@@ -170,6 +206,8 @@ public class Build : MonoBehaviour
                 }
             }
         }
+
+        budget = budget - piece.GetComponent<Piece>().getCost();
     }
 
     void delete()
@@ -192,7 +230,53 @@ public class Build : MonoBehaviour
             anchor1.GetComponent<Anchor>().deletePiece(piece);
             anchor2.GetComponent<Anchor>().deletePiece(piece);
 
+            budget = budget + piece.GetComponent<Piece>().getCost();
+
             Destroy(piece);
         }
+    }
+
+    private void toggleDeleteMode()
+    {
+        if(!deleting)
+        {
+            deleting = true;
+        }
+        else
+        {
+            deleting = false;
+        }
+    }
+
+    private void changeMaterial(int type)
+    {
+        if(type == 1)
+        {
+            bridgePiece = roadPiece;
+        }
+        else if(type == 2)
+        {
+            bridgePiece = woodPiece;
+        }
+        else if(type == 3)
+        {
+            bridgePiece = brickPiece;
+        }
+        else if(type == 4)
+        {
+            bridgePiece = metalPiece;
+        }
+    }
+
+    void OnEnable()
+    {
+        EventHandler.toggleDelete += toggleDeleteMode;
+        EventHandler.onMaterialChange += changeMaterial;
+    }
+
+    void OnDisable()
+    {
+        EventHandler.toggleDelete -= toggleDeleteMode;
+        EventHandler.onMaterialChange -= changeMaterial;
     }
 }

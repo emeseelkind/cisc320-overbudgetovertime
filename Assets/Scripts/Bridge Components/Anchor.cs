@@ -28,19 +28,19 @@ public class Anchor : MonoBehaviour
     public void deletePiece(GameObject piece)
     {
         connectedPieces.Remove(piece);
-        if (connectedPieces.Count == 0)
+        if (connectedPieces.Count == 0 && isHard == false)
         {
             Destroy(gameObject);
         }
     }
 
-    public float disperseLoad(GameObject originPiece, float valueDisperse)
+    public float disperseLoad(GameObject originPiece, float valueDisperse, int level)
     {
         float undispersedLoad = valueDisperse;
-        float dispersionPerPiece = valueDisperse * 0.2f;
+        float dispersionPerPiece = valueDisperse * 0.3f;
         if(connectedPieces.Count > 4)
         {
-            dispersionPerPiece = (valueDisperse * 0.6f) / (connectedPieces.Count-1);
+            dispersionPerPiece = (valueDisperse * 0.9f) / (connectedPieces.Count-1);
         }
 
         foreach(GameObject piece in connectedPieces)
@@ -50,26 +50,15 @@ public class Anchor : MonoBehaviour
                 continue;
             }
 
-            if(piece.GetComponent<Piece>().takingLoad == false)
+            if(piece.GetComponent<Piece>().numberFromSource > level)
             {
-                piece.GetComponent<Piece>().takingLoad = true;
-                piece.GetComponent<Piece>().setDisperseLoad(dispersionPerPiece);
+                //piece.GetComponent<Piece>().takingLoad = true;
+                piece.GetComponent<Piece>().numberFromSource = level;
+               piece.GetComponent<Piece>().setDisperseLoad(dispersionPerPiece);
                 undispersedLoad -= dispersionPerPiece;
-                piece.GetComponent<Piece>().takingLoad = false;               
+                //piece.GetComponent<Piece>().takingLoad = false;               
             }
         }
         return undispersedLoad;
     }
-    
-    /*
-    void OnEnable()
-    {
-        EventHandler.totalStrengthChanged += calculateConnectingStrength;
-    }
-
-    void OnDisable()
-    {
-        EventHandler.totalStrengthChanged -= calculateConnectingStrength;
-    }
-    */
 }
