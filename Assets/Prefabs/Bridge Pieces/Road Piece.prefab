@@ -216,7 +216,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -263,7 +263,6 @@ MonoBehaviour:
   loadTaken: 0
   materialStrength: 15
   playPhase: 1
-  takingLoad: 0
   statusColor: {fileID: 6691872429663358812}
   numberFromSource: 100
   costValue: 1

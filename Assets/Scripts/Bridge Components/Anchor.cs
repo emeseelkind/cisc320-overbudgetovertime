@@ -37,10 +37,10 @@ public class Anchor : MonoBehaviour
     public float disperseLoad(GameObject originPiece, float valueDisperse, int level)
     {
         float undispersedLoad = valueDisperse;
-        float dispersionPerPiece = valueDisperse * 0.3f;
+        float dispersionPerPiece = valueDisperse * 0.25f;
         if(connectedPieces.Count > 4)
         {
-            dispersionPerPiece = (valueDisperse * 0.9f) / (connectedPieces.Count-1);
+            dispersionPerPiece = (valueDisperse * 0.75f) / (connectedPieces.Count-1);
         }
 
         foreach(GameObject piece in connectedPieces)

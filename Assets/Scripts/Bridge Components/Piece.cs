@@ -15,7 +15,6 @@ public class Piece : MonoBehaviour
     public float materialStrength;
 
     public bool playPhase = false;
-    public bool takingLoad = false;
 
     public SpriteRenderer statusColor;
 
@@ -31,11 +30,6 @@ public class Piece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playPhase)
-        {
-            //calculateLoad();
-        }
-
         if(loadTaken > materialStrength * (2f / 3f)){
             statusColor.color = new Color(1f, 0f, 0f, 120f / 255f);
         }
@@ -101,13 +95,11 @@ public class Piece : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //takingLoad = true;
         numberFromSource = 0;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //takingLoad = false;
         loadTaken = 0;
         numberFromSource = 100;
     }

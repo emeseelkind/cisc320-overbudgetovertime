@@ -48,4 +48,19 @@ public class GridRenderer : MonoBehaviour
         lineRenderer.endWidth = 0.05f;
         lineRenderer.useWorldSpace = true;
     }
+
+    private void destroyGrid()
+    {
+        Destroy(gameObject);
+    }
+
+    void OnEnable()
+    {
+        EventHandler.addGravity += destroyGrid;
+    }
+
+    void OnDisable()
+    {
+        EventHandler.addGravity -= destroyGrid;
+    }
 }
