@@ -2110,7 +2110,7 @@ GameObject:
   - component: {fileID: 391682863}
   - component: {fileID: 391682861}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ButtonWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2684,7 +2684,7 @@ GameObject:
   - component: {fileID: 651459641}
   - component: {fileID: 651459640}
   m_Layer: 0
-  m_Name: Button (1)
+  m_Name: ButtonBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4981,7 +4981,7 @@ GameObject:
   - component: {fileID: 1460110454}
   - component: {fileID: 1460110453}
   m_Layer: 0
-  m_Name: Button (2)
+  m_Name: ButtonSteel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
