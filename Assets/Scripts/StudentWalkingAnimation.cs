@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class StudentWalkingAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float moveSpeed = 2f;  // Speed of movement
+    public float targetX = 10f;  // Target X position
+
     void Start()
     {
-        
+        // Initialization logic (if needed)
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Move the object towards the target X position
+        if (transform.position.x < targetX)
+        {
+            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        }
     }
 }
