@@ -3329,6 +3329,14 @@ PrefabInstance:
     - target: {fileID: 5762057643292558362, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1038557200}
+    - target: {fileID: 5762057643292558362, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchSettingPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762057643292558362, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6421602971943098162, guid: f4e0dd04adb3e0e42abffc6ad03f0e3b, type: 3}
       propertyPath: m_AnchorMax.x
