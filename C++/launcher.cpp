@@ -145,7 +145,7 @@ int main(int argc, char *argv[]) {
                             std::cout << "Starting a new game...\n";
 
                             // Build the command to launch Unity with arguments for a new game
-                            std::string command = "MyGame.exe --newgame --difficulty=" + std::to_string(difficulty) +
+                            std::string command = "\"Over Budget, Over Time.exe\" --newgame --difficulty=" + std::to_string(difficulty) +
                                                 " --masterVolume=" + (masterVolume ? "1" : "0") +
                                                 " --music=" + (music ? "1" : "0") +
                                                 " --sound=" + (gameSound ? "1" : "0");
@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
                             std::cout << "Loading game...\n";
 
                             // Build the command to launch Unity with arguments for loading a game
-                            std::string command = "MyGame.exe --load --difficulty=" + std::to_string(difficulty) +
+                            std::string command = "\"Over Budget, Over Time.exe\" --load --difficulty=" + std::to_string(difficulty) +
                                                 " --masterVolume=" + (masterVolume ? "1" : "0") +
                                                 " --music=" + (music ? "1" : "0") +
                                                 " --sound=" + (gameSound ? "1" : "0");

@@ -44,13 +44,13 @@ public class CommandLineArgsHandler : MonoBehaviour
             else if (arg.StartsWith("--masterVolume="))
             {
                 bool masterVolume = arg.Substring("--masterVolume=".Length) == "1";
-                PlayerPrefs.SetInt("MasterVolume", masterVolume ? 1 : 0);
+                PlayerPrefs.SetInt("MVEnabled", masterVolume ? 1 : 0);
                 Debug.Log($"Master Volume: {(masterVolume ? "ON" : "OFF")}");
             }
             else if (arg.StartsWith("--music="))
             {
                 bool music = arg.Substring("--music=".Length) == "1";
-                PlayerPrefs.SetInt("MVEnabled", music ? 1 : 0);
+                PlayerPrefs.SetInt("BGMEnabled", music ? 1 : 0);
                 Debug.Log($"Music: {(music ? "ON" : "OFF")}");
             }
             else if (arg.StartsWith("--sound="))
