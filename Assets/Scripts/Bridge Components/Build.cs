@@ -206,8 +206,9 @@ public class Build : MonoBehaviour
                 }
             }
         }
-
-        budget = budget - piece.GetComponent<Piece>().getCost();
+   
+        float cost = piece.GetComponent<Piece>().getCost();
+        budget = budget - cost;
     }
 
     void delete()
