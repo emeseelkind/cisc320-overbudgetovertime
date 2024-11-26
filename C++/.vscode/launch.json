@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/andre/OneDrive/Desktop/School/Year 3/CISC 320/CISC320-G18-Project/cisc320-overbudgetovertime/cisc320-overbudgetovertime/C++",
+      "program": "c:/Users/andre/OneDrive/Desktop/School/Year 3/CISC 320/CISC320-G18-Project/cisc320-overbudgetovertime/cisc320-overbudgetovertime/C++/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
