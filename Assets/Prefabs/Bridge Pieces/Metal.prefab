@@ -261,9 +261,8 @@ MonoBehaviour:
   anchor1: {fileID: 0}
   anchor2: {fileID: 0}
   loadTaken: 0
-  materialStrength: 25
+  materialStrength: 5
   playPhase: 1
-  takingLoad: 0
   statusColor: {fileID: 5101622069721339941}
   numberFromSource: 100
   costValue: 3

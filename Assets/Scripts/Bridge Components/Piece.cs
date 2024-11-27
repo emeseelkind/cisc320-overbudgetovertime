@@ -56,11 +56,11 @@ public class Piece : MonoBehaviour
         bool anchor2IsHard = anchor2.GetComponent<Anchor>().isHard;
         if (anchor1IsHard)
         {
-            tempLoad = tempLoad - (tempLoad * 0.3f);
+            tempLoad = tempLoad - (tempLoad * 0.5f);
         }
         if(anchor2IsHard)
         {
-            tempLoad = tempLoad - (tempLoad * 0.3f);
+            tempLoad = tempLoad - (tempLoad * 0.5f);
         }
 
         if (anchor1IsHard && !anchor2IsHard)

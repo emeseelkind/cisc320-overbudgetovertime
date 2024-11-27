@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    float budget;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            EventHandler.TriggerGravity();
+            startGame();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -38,6 +39,15 @@ public class InputManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             EventHandler.TriggerMaterialChange(4);
+        }
+    }
+
+    public void startGame()
+    {
+        budget = gameObject.GetComponent<Build>().budget;
+        if (budget >= 0.0f)
+        {
+            EventHandler.TriggerGravity();
         }
     }
 }
