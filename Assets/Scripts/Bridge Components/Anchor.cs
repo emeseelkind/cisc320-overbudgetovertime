@@ -61,4 +61,22 @@ public class Anchor : MonoBehaviour
         }
         return undispersedLoad;
     }
+
+    private void changeColor()
+    {
+        if (!isHard)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0f);
+        }
+    }
+
+    void OnEnable()
+    {
+        EventHandler.addGravity += changeColor;
+    }
+
+    void OnDisable()
+    {
+        EventHandler.addGravity -= changeColor;
+    }
 }
