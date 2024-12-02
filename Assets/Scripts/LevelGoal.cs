@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelGoal : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class LevelGoal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel") +1);
+        SceneManager.LoadScene("LevelSelectScene");
         Debug.Log($"Trigger entered by: {collision.gameObject.name}");
     }
 }

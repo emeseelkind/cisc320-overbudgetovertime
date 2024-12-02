@@ -23,7 +23,7 @@ public class LevelSelect : MonoBehaviour
         newButton.Initialize(level, text, () =>
         {
             Debug.Log($"Level {level} selected!");
-            SceneManager.LoadScene("Scenes/GameScene");
+            SceneManager.LoadScene($"Scenes/Level {level}");
         });
 
         UpdateContentHeight(newButton.GetComponent<RectTransform>());
