@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -40,6 +41,21 @@ public class InputManager : MonoBehaviour
         {
             EventHandler.TriggerMaterialChange(4);
         }
+    }
+
+    public void ButtonWoodEvent()
+    {
+        EventHandler.TriggerMaterialChange(1);
+    }
+
+    public void ButtonBrickEvent()
+    {
+        EventHandler.TriggerMaterialChange(2);
+    }
+
+    public void ButtonSteelEvent()
+    {
+        EventHandler.TriggerMaterialChange(3);
     }
 
     public void startGame()

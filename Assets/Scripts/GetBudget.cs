@@ -19,6 +19,6 @@ public class GetBudget : MonoBehaviour
     {
         float budget = gameManager.GetComponent<Build>().budget;
 
-        textMeshPro.text = budget.ToString();
+        textMeshPro.text = budget.ToString("F2");
     }
 }
