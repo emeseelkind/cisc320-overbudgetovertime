@@ -1,7 +1,9 @@
 OVER-BUDGET OVER-TIME
 
 CISC/CMPE 320 Final Project
+
 Group 18
+
 William Ban, Andrew Bissada, Kevin Chen, Emese Elkind, Sean Kaminsky, Will Wang
 
 Project Idea:
